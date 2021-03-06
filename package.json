@@ -1,0 +1,19 @@
+{
+  "name": "bsale",
+  "version": "1.0.0",
+  "description": "ecommerce para prueba",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server src --verbose",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecommerse",
+    "bsale"
+  ],
+  "author": "Jair Fonseca",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
