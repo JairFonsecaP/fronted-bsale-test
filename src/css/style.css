@@ -9,7 +9,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #007bff;
+  background-color: #999;
 }
 header a {
   text-decoration: none;
@@ -27,14 +27,18 @@ header a {
 .search {
   border: 2px solid #666;
   width: 75vw;
-  height: 25px;
+  height: 35px;
 }
 .button-search {
-  border: 0.2em solid #666;
+  border: 2px solid #666;
   width: 75vw;
-  height: 25px;
+  height: 35px;
   background-color: #ff6a13;
   margin-top: 10px;
+  transition: 0.5s;
+}
+.button-search:hover {
+  box-shadow: 0 0 10px #222;
 }
 .bag-shopping {
   margin: 0.5em 0;
@@ -43,6 +47,10 @@ header a {
   padding: 5px;
   border-radius: 50%;
   border: 0.1px solid white;
+  transition: 0.5s;
+}
+.bag-shopping:hover {
+  box-shadow: 0 0 10px #222;
 }
 main {
   padding: 20px 0;
@@ -54,6 +62,10 @@ main {
 .category-name {
   font-size: 2em;
 }
+.section a {
+  text-decoration: none;
+  color: #555;
+}
 .product {
   display: flex;
   justify-content: space-between;
@@ -63,14 +75,14 @@ main {
   padding: 10px;
   margin: 3px;
   background-color: #fff;
-  box-shadow: 0 0 1px #999;
+  box-shadow: 0 0 5px #999;
   border-radius: 20px;
 }
 .product-name {
   font-weight: bold;
 }
 .img-product {
-  height: 10em;
+  width: 100px;
 }
 .product-information {
   font-size: 1.4em;
@@ -89,6 +101,17 @@ main {
   position: relative;
   top: 30px;
   left: -35px;
+  transition: 0.5s;
+}
+.add-cart:hover {
+  box-shadow: 0 0 10px #222;
+}
+.final-price {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.discount {
+  font-weight: bold;
 }
 footer {
   text-align: center;
@@ -112,28 +135,41 @@ footer {
     margin: auto;
   }
   main {
-    padding: 10px 50px;
+    padding: 50px;
   }
-
-  section {
+  section,
+  .section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
   }
+  .category {
+    text-align: center;
+    width: 90vw;
+    padding: 15px 0;
+    border-top: 2px solid #999;
+    border-bottom: 2px solid #999;
+  }
   .product {
     width: 200px;
+    height: 320px;
     flex-direction: column;
     border-radius: 0;
     padding-bottom: 0px;
     margin: 15px;
+    transition-duration: 0.5s;
+  }
+  .product:hover {
+    box-shadow: 0 0 10px #666;
   }
   .product-name {
     font-weight: 100;
     margin-top: 20px;
   }
-  .original-price {
-    border-top: 1px solid #626262;
-    padding-top: 5px;
+
+  .product-name {
+    border-bottom: 1px solid #f1f1f1;
+    padding-bottom: 15px;
   }
   .add-cart {
     top: -45px;
