@@ -1,23 +1,22 @@
-import data from "../js/data.js";
-const url = "https://backend-bsale-test.herokuapp.com/api/";
-//const url = "http://localhost:3000/api/";
+//const url = "https://backend-bsale-test.herokuapp.com/api/";
+const url = "http://localhost:3000/api/";
 const toThousand = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const HomeView = {
   render: async () => {
-    const productApi = await fetch(url + "products/list", {
+    const productsApi = await fetch(url + "products/list", {
       "Content-Type": "application/json",
     });
     const categoriesApi = await fetch(url + "category/list", {
       "Content-Type": "application/json",
     });
-    if (!productApi || !productApi.ok) {
+    if (!productsApi || !productsApi.ok) {
       return `<div>Error cargando los productos</div>`;
     }
     if (!categoriesApi || !categoriesApi.ok) {
       return `<div>Error cargando los productos</div>`;
     }
-    const products = await productApi.json();
+    const products = await productsApi.json();
     const categories = await categoriesApi.json();
 
     return categories.map(
