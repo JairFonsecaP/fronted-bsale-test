@@ -68,12 +68,12 @@ main {
 }
 .product {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   width: 80vw;
   border: 1px solid #f1f1f1;
-  padding: 10px;
-  margin: 3px;
+  margin: 10px 0;
+  padding: 5px;
   background-color: #fff;
   box-shadow: 0 0 5px #999;
   border-radius: 20px;
@@ -98,9 +98,8 @@ main {
   border: 1px solid #626262;
   color: white;
   background-color: #626262;
-  position: relative;
-  top: 30px;
-  left: -35px;
+  top: 70px;
+  left: -30px;
   transition: 0.5s;
 }
 .add-cart:hover {
@@ -135,11 +134,11 @@ footer {
     margin: auto;
   }
   main {
-    padding: 50px;
+    padding: 50px 200px;
   }
   section,
   .section {
-    display: flex;
+    display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
   }
@@ -152,7 +151,7 @@ footer {
   }
   .product {
     width: 200px;
-    height: 320px;
+    height: 350px;
     flex-direction: column;
     border-radius: 0;
     padding-bottom: 0px;

@@ -16,24 +16,27 @@ const HomeView = {
     if (!categoriesApi || !categoriesApi.ok) {
       return `<div>Error cargando los productos</div>`;
     }
+
     const products = await productsApi.json();
     const categories = await categoriesApi.json();
 
-    return categories.map(
-      (category) =>
-        `<div>
+    return categories
+      .map(
+        (category) =>
+          `<div>
         <h2 class = "category"> ${category.name.toUpperCase()}</h2>
-        <ul class="section">      
-        ${products.map((product) =>
-          category.id === product.category
-            ? `<a href="/#/product/${product.id}">
-            <li class="product">
+        <div class="section">      
+        ${products
+          .map((product) =>
+            product.category === category.id
+              ? `<a href="/#/product/${product.id}">  
+            
+        <div class="product"> 
           <img
             src="${product.url_image}"
             alt="${product.name}"
             class="img-product"
           />
-  
           <div class="product-information">
             <p class="product-name">${product.name}</p>           
             ${
@@ -41,6 +44,7 @@ const HomeView = {
                 ? `<p class="original-price">$ ${product.price}</p>`
                 : ``
             }
+            
             ${
               product.discount > 0
                 ? `<p class="discount">${product.discount} %</p>`
@@ -48,18 +52,21 @@ const HomeView = {
             }
             ${
               product.discount > 0
-                ? `<p class="final-price">$ ${toThousand(
+                ? `<p class="final-price">$ ${
                     product.price - (product.price * product.discount) / 100
-                  )}</p>`
-                : `<p class="final-price">$ ${toThousand(product.price)}</p>`
+                  }</p>`
+                : `<p class="final-price">$ ${product.price}</p>`
             }
+            
           </div>
           <a href="/#/"><i class="fas fa-cart-plus add-cart"></i></a>
-        </li> </a>`
-            : ``
-        )}<ul>
+        </div></a> `
+              : ``
+          )
+          .join("")}</div>
         </div>`
-    );
+      )
+      .join("");
   },
 };
 
