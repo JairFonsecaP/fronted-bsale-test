@@ -21,7 +21,7 @@ const router = async () => {
 
   const view = routes[parseUrl] ? routes[parseUrl] : Error404View;
 
-  const main = document.getElementById("products-container");
+  const main = document.getElementById("main-container");
 
   main.innerHTML = await view.render();
   await view.after_render();
