@@ -38,7 +38,7 @@ const removeToCart = (id) => {
 };
 const CartView = {
   after_render: () => {
-    const qtySelect = document.getElementsByClassName("qty-select");
+    const qtySelect = document.getElementsByClassName("cart-qty-select");
     Array.from(qtySelect).forEach((qty) => {
       qty.addEventListener("change", (e) => {
         const item = getCartItems().find((x) => x.id === parseInt(qty.id));
@@ -47,7 +47,7 @@ const CartView = {
       });
     });
 
-    const deleteButton = document.getElementsByClassName("delete-button");
+    const deleteButton = document.getElementsByClassName("cart-delete-button");
     Array.from(deleteButton).forEach((button) => {
       button.addEventListener("click", () => {
         removeToCart(button.id);
@@ -80,76 +80,85 @@ const CartView = {
     const cartItems = getCartItems();
     noLoading();
     return `
+    <a href="/"><p class="back-to-home"><< Buscar más productos</p></a>
     <div>
-      <ul>
+      <ul class="list-cart">
           ${
             cartItems.length === 0
-              ? `<li>El carrito está vacio</li>`
+              ? `<li class="empty-cart">El carrito está vacio</li>`
               : `${cartItems
                   .map(
-                    (product) => ` 
-          <li>
-            <div>            
-              <div>
-                <img src="${product.image}" alt="${product.name}"/>
-              </div> 
-             <a href="/#/product/${product.id}"> <h4>${
+                    (product) => `                     
+          <li class="cart-card">
+            <div> 
+              <img src="${product.image}" alt="${
                       product.name
-                    }</h4></a>       
-              <p>$ ${toThousand(product.price)}</p>
-              <p>Cantidad: ${product.quantity}</p>
-              <select id="${product.id}" class="qty-select">
+                    }" class="cart-img"/>
+              <a href="/#/product/${
+                product.id
+              }" class="cart-name-product"> <h4>${product.name}</h4></a>  
+              <div class="cart-qty">     
+              <p class="cart-unit-price">Precio Unitario: $ ${toThousand(
+                product.price
+              )}</p> 
+              <p class="cart-unit-price">Cantidad: &nbsp
+              <select id="${product.id}" class="cart-qty-select">
                 ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((x) =>
                   product.quantity === x
                     ? `<option selected value="${x}">${x}</option>`
                     : `<option  value="${x}">${x}</option>`
                 )}
-              </select>
+              </select></p>
+              </div>
             </div>
-            <div>
-              <p>Precio: $ ${toThousand(product.price * product.quantity)}</p>
-            </div>
-            <button type="button" id="${product.id}" class="delete-button">
+            <div class="cart-total-delete">
+              <p class="cart-product-total">Total: $ ${toThousand(
+                product.price * product.quantity
+              )}</p>
+            
+            <button type="button" id="${product.id}" class="cart-delete-button">
                 Eliminar
             </button>
+            </div>
           </li>`
                   )
                   .join("\n")}`
           }
       </ul>
-      <div>
-        <h4>
-          Subtotal (${cartItems.reduce(
-            (a, c) => a + c.quantity,
+      ${
+        cartItems.length > 0
+          ? `
+          <div class="cart-total">
+      <h3>
+        Subtotal (${cartItems.reduce((a, c) => a + c.quantity, 0)} productos) : 
+        $ ${toThousand(cartItems.reduce((a, c) => a + c.price * c.quantity, 0))}
+      </h3>
+      <h3>
+        Descuento: - $ ${toThousand(
+          cartItems.reduce(
+            (a, c) => a + (c.quantity * c.price * c.discount) / 100,
             0
-          )} productos) : 
-          $ ${toThousand(
-            cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
-          )}
-        </h4>
-        <h3>
-          Descuento: - $ ${toThousand(
+          )
+        )} 
+      </h3>
+      <h2>
+          TOTAL = $ ${toThousand(
             cartItems.reduce(
-              (a, c) => a + (c.quantity * c.price * c.discount) / 100,
+              (a, c) =>
+                a +
+                c.price * c.quantity -
+                (c.quantity * c.price * c.discount) / 100,
               0
             )
-          )} 
-        </h3>
-        <h2>
-            TOTAL = $ ${toThousand(
-              cartItems.reduce(
-                (a, c) =>
-                  a +
-                  c.price * c.quantity -
-                  (c.quantity * c.price * c.discount) / 100,
-                0
-              )
-            )}
-        </h2>
-        <button id="pay-button">
-            Pagar
-        </button>
-      </div>
+          )}
+      </h2>
+      <button id="pay-button" class="detail-buy">
+          Pagar
+      </button>
+    </div>`
+          : `<a href="/" class="button-cart-empty" id="pay-button">Haz click aquí para ver todos nuestros productos</a>`
+      }
+      
       
     </div>`;
   },
