@@ -4,7 +4,7 @@
   "description": "ecommerce para prueba",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "dev": "live-server src --verbose",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,9 +15,9 @@
   "author": "Jair Fonseca",
   "license": "ISC",
   "devDependencies": {
-    "live-server": "^1.2.1",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "live-server": "^1.2.1"
+  },
+  "dependencies": {
+    "live-server": "^1.2.1"
   }
 }

@@ -48,6 +48,7 @@ const CartView = {
     });
 
     const deleteButton = document.getElementsByClassName("cart-delete-button");
+
     Array.from(deleteButton).forEach((button) => {
       button.addEventListener("click", () => {
         removeToCart(button.id);
@@ -55,7 +56,6 @@ const CartView = {
     });
 
     document.getElementById("pay-button").addEventListener("click", () => {
-      deleteCartItems();
       document.location.hash = "/";
     });
   },
