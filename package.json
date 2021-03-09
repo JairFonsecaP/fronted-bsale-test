@@ -4,7 +4,7 @@
   "description": "ecommerce para prueba",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "live-server src --verbose",
     "dev": "live-server src --verbose",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
