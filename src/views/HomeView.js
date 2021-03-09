@@ -1,8 +1,20 @@
+import {
+  noLoading,
+  parseRequestUrl,
+  showLoading,
+  toThousand,
+} from "../js/utils.js";
+
 //const url = "https://backend-bsale-test.herokuapp.com/api/";
 const url = "http://localhost:3000/api/";
-const toThousand = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
+showLoading();
 const HomeView = {
+  after_render: () => {
+    const request = parseRequestUrl();
+    document.getElementById("add-button").addEventListener("click", () => {
+      document.location.hash = `/cart/${request.id}`;
+    });
+  },
   render: async () => {
     const productsApi = await fetch(url + "products/list", {
       "Content-Type": "application/json",
@@ -10,6 +22,7 @@ const HomeView = {
     const categoriesApi = await fetch(url + "category/list", {
       "Content-Type": "application/json",
     });
+    noLoading();
     if (!productsApi || !productsApi.ok) {
       return `<div>Error cargando los productos</div>`;
     }
@@ -18,6 +31,7 @@ const HomeView = {
     }
 
     const products = await productsApi.json();
+
     const categories = await categoriesApi.json();
 
     return categories
@@ -41,7 +55,7 @@ const HomeView = {
             <p class="product-name">${product.name}</p>           
             ${
               product.discount > 0
-                ? `<p class="original-price">$ ${product.price}</p>`
+                ? `<p class="original-price">$ ${toThousand(product.price)}</p>`
                 : ``
             }
             
@@ -52,14 +66,16 @@ const HomeView = {
             }
             ${
               product.discount > 0
-                ? `<p class="final-price">$ ${
+                ? `<p class="final-price">$ ${toThousand(
                     product.price - (product.price * product.discount) / 100
-                  }</p>`
-                : `<p class="final-price">$ ${product.price}</p>`
+                  )}</p>`
+                : `<p class="final-price">$ ${toThousand(product.price)}</p>`
             }
             
           </div>
-          <a href="/#/"><i class="fas fa-cart-plus add-cart"></i></a>
+          <a href="/#/product/${
+            product.id
+          }" id="add button"><i id="add button" type="button" class="fas fa-cart-plus add-cart"></i></a>
         </div></a> `
               : ``
           )

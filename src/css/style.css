@@ -5,6 +5,22 @@ html {
   font-family: "Roboto", sans-serif;
   font-size: 10px;
 }
+.load {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(16, 16, 16, 0.5);
+}
+.load.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
 header {
   display: flex;
   flex-direction: column;

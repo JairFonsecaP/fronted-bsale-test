@@ -1,5 +1,10 @@
 import { getProduct } from "../js/api.js";
-import { parseRequestUrl } from "../utils.js";
+import {
+  parseRequestUrl,
+  showLoading,
+  noLoading,
+  toThousand,
+} from "../js/utils.js";
 
 const ProductView = {
   after_render: () => {
@@ -10,7 +15,10 @@ const ProductView = {
   },
   render: async () => {
     const request = parseRequestUrl();
+    showLoading();
     const product = await getProduct(request.id);
+
+    noLoading();
     if (product.error) {
       return `<div>${product.error}</div>`;
     }
@@ -19,14 +27,18 @@ const ProductView = {
       <h1>${product.name}</h1>
       <img src="${product.url_image}" alt="${product.name}"/>
       <ul>
-        ${product.discount ? `<li>PRECIO INICIAL: $ ${product.price}</li>` : ``}
+        ${
+          product.discount
+            ? `<li>PRECIO INICIAL: $ ${toThousand(product.price)}</li>`
+            : ``
+        }
         ${product.discount ? `<li>DESCUENTO: $ ${product.discount}</li>` : ``}
         ${
           product.discount
-            ? `<li>PRECIO: $ ${
+            ? `<li>PRECIO: $ ${toThousand(
                 product.price - (product.price * product.discount) / 100
-              }</li>`
-            : `<li>PRECIO: $ ${product.price}</li>`
+              )}</li>`
+            : `<li>PRECIO: $ ${toThousand(product.price)}</li>`
         }
       <button class="buy" id="add-button">Agregar a carrito</button>
     </div>`;

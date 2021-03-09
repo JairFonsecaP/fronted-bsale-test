@@ -10,3 +10,7 @@ export const setCartItems = (cartItems) => {
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
 };
+
+export const deleteCartItems = () => {
+  localStorage.removeItem("cartItems")
+}
