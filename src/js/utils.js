@@ -34,7 +34,7 @@ export const rerender = async (component) => {
 };
 /**
  *
- * @param {UN NUMBER}
+ * @param {NUMBER}
  * @returns EL NUMERO PERO STRING SEPARADO POR UN PUNTO CADA 3 DIGITOS
  */
 export const toThousand = (n) =>

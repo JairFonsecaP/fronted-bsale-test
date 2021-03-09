@@ -1,5 +1,12 @@
+/**
+ * IMPORTACIONES
+ */
 import { apiUrl } from "./config.js";
-
+/**
+ * HACE LA PETICIÓN AL BACKEND PARA QUE TRAIGA UN PRODUCTO EN ESPECIFICO.
+ * @param {NUMBER} id
+ * @returns
+ */
 export const getProduct = async (id) => {
   try {
     const productApi = await fetch(`${apiUrl}products/detail/${id}`, {
@@ -18,6 +25,12 @@ export const getProduct = async (id) => {
   }
 };
 
+/**
+ * RECIBE UN STRING Y DEVUELVE TODAS LAS COINCIDENCIAS QUE HAYA
+ * POR NOMBRE EN LA BASE DE DATOS.
+ * @param {QUERY} query
+ * @returns ARRAY CON OBJETOS DE COINCIDENCIAS
+ */
 export const searchProducts = async (query) => {
   try {
     const searchApi = await fetch(`${apiUrl}products/search/${query}`, {

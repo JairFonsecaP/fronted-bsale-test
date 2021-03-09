@@ -74,7 +74,7 @@ const CartView = {
     });
 
     /**
-     * LLAMA METODO QUE ELIMITA TODOS LOS PRODUCTOS DE LOCALSTORAGE
+     * LLAMA METODO QUE ELIMINA TODOS LOS PRODUCTOS DE LOCALSTORAGE
      */
     document.getElementById("pay-button").addEventListener("click", () => {
       deleteCartItems();
