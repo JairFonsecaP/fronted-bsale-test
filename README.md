@@ -23,10 +23,10 @@ Las consultas se pueden hacer desde el header donde hay una entrada de texto y s
 
 #### app.js
 
-## VISTAS
-
 Ya en el proyecto se puede encontrar un archivo llamado "app.js" que importa todas las vistas que se generaron y tambien hace el sistema de ruteo a través de la aplicación llamando a cada vista o componente segun sea la peticion del cliente,
 y en caso de no encontrar el producto retornara una vista 404 que informa que no puedo ser encontrada la vista que se buscaba.
+
+## VISTAS
 
 #### HomeView.js
 
