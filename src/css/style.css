@@ -9,17 +9,27 @@ html {
   font-size: 10px;
   background-color: #f1f1f1;
 }
+body {
+  margin: 0;
+}
 a {
   text-decoration: none;
 }
-
+main {
+  width: 100vw;
+  max-width: 1200px;
+  display: block;
+  margin: auto;
+}
 /*HEADER*/
-
 header {
+  background-color: #999;
+  width: 100vw;
+}
+.header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #999;
 }
 header a {
   text-decoration: none;
@@ -51,7 +61,7 @@ header a {
   box-shadow: 0 0 10px #222;
 }
 .bag-shopping {
-  margin: 0.5em 0;
+  margin: 5px 0;
   font-size: 2em;
   color: white;
   padding: 5px;
@@ -61,6 +71,37 @@ header a {
 }
 .bag-shopping:hover {
   box-shadow: 0 0 10px #222;
+}
+/*MENU DESPLEGABLE*/
+#menu-button {
+  display: none;
+}
+nav {
+  display: none;
+}
+.hamburger-menu {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 3em;
+  padding: 10px 0;
+  border-bottom: 1px solid black;
+}
+.list-menu-hamburger {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: auto;
+  list-style: none;
+  align-items: center;
+}
+.list-menu-hamburger a {
+  color: white;
+  font-size: 1.5em;
+  padding: 5px;
+}
+#menu-button:checked ~ nav {
+  display: flex;
 }
 
 /*ELEMENTO DE CARGA DE VISTAS TEMPORAL*/
@@ -111,6 +152,7 @@ header a {
   margin: 10px 0;
   background-color: #fff;
 }
+
 .img-product {
   width: 120px;
   max-height: 200px;
@@ -150,6 +192,7 @@ header a {
 .detail-card {
   background-color: #fff;
   border: 1px solid #999;
+
   text-align: center;
   margin: auto;
   width: 90vw;
@@ -295,7 +338,10 @@ footer {
   header {
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 50px;
+  }
+  .header {
+    flex-direction: row;
+    justify-content: center;
   }
   .form-search {
     flex-direction: row;
@@ -308,7 +354,23 @@ footer {
     width: 70px;
     margin: auto;
   }
-  /* TARJETA PRODUCTO DESDE 768PX O MAS GRANDE*/
+  /*MENU DESPLEGABLE*/
+  .hamburger-menu {
+    display: none;
+  }
+  .menu-navbar nav {
+    display: flex;
+  }
+  .list-menu-hamburger {
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.3em;
+  }
+  nav {
+    padding: 5px;
+  }
+
+  /* TARJETA PRODUCTO DESDE 768PX O PANTALLAS MAS GRANDE*/
   .section {
     flex-direction: row;
     flex-wrap: wrap;
@@ -321,6 +383,12 @@ footer {
     margin: 10px 10px;
     flex-direction: column;
     align-items: flex-start;
+    opacity: 0.8;
+    transition: 0.5s;
+  }
+  .product:hover {
+    box-shadow: 0 0 50px black;
+    opacity: 1;
   }
   .img-product {
     width: 150px;
@@ -339,5 +407,61 @@ footer {
   .add-cart {
     top: -35px;
     right: -150px;
+  }
+  /*DETAIL PRODUCTO DESDE 768PX O PANTALLAS MAS GRANDES*/
+
+  .detail-card {
+    display: block;
+    margin: auto;
+    align-items: center;
+    border-radius: 0;
+    max-width: 1000px;
+  }
+  .detail-img {
+    width: 300px;
+  }
+  /*CARRITO DE COMPRAS DESDE 768PX O PANTALLAS MAS GRANDES*/
+  .cart-card {
+    flex-direction: row;
+
+    border-radius: 0;
+    justify-content: space-between;
+
+    max-width: 1000px;
+  }
+  .cart-info {
+    display: flex;
+
+    align-items: flex-end;
+  }
+  .cart-img {
+    padding: 0;
+    align-self: start;
+  }
+  .cart-name-product {
+    position: relative;
+    top: -45px;
+    right: -100px;
+    display: block;
+    margin: auto;
+  }
+  .cart-img {
+    height: 150px;
+    width: 150px;
+    padding: 5px;
+  }
+  .cart-total-delete {
+    align-self: center;
+    flex-direction: column;
+    padding-right: 10px;
+    padding-bottom: 10px;
+  }
+  .cart-qty {
+    display: flex;
+    flex-direction: column;
+  }
+  .cart-total {
+    font-weight: bold;
+    font-size: 2em;
   }
 }

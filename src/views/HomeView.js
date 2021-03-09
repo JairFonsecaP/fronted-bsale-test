@@ -34,8 +34,11 @@ const HomeView = {
     return categories
       .map(
         (category) =>
-          `<div>
-        <h2 class = "category"> ${category.name.toUpperCase()}</h2>
+          `
+          <div>
+        <h2 class = "category" id="${
+          category.name
+        }"> ${category.name.toUpperCase()}</h2>
         <div class="section">      
         ${products
           .map((product) =>

@@ -90,7 +90,7 @@ const CartView = {
                   .map(
                     (product) => `                     
           <li class="cart-card">
-            <div> 
+            <div class="cart-info"> 
               <img src="${product.image}" alt="${
                       product.name
                     }" class="cart-img"/>
@@ -98,7 +98,7 @@ const CartView = {
                 product.id
               }" class="cart-name-product"> <h4>${product.name}</h4></a>  
               <div class="cart-qty">     
-              <p class="cart-unit-price">Precio Unitario: $ ${toThousand(
+              <p class="cart-unit-price">Precio Unitario: $${toThousand(
                 product.price
               )}</p> 
               <p class="cart-unit-price">Cantidad: &nbsp
@@ -134,7 +134,7 @@ const CartView = {
         $ ${toThousand(cartItems.reduce((a, c) => a + c.price * c.quantity, 0))}
       </h3>
       <h3>
-        Descuento: - $ ${toThousand(
+        Descuento: $ -${toThousand(
           cartItems.reduce(
             (a, c) => a + (c.quantity * c.price * c.discount) / 100,
             0
