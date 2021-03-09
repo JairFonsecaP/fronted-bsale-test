@@ -1,3 +1,6 @@
+/**
+ * IMPORTACIONES
+ */
 import { getProduct } from "../js/api.js";
 import {
   parseRequestUrl,
@@ -5,9 +8,15 @@ import {
   noLoading,
   toThousand,
 } from "../js/utils.js";
-
+/**
+ * VISTA
+ */
 const ProductView = {
   after_render: () => {
+    /**
+     * BOTON ESCUCHANDO SI SE AGREGA UN PRODUCTO
+     * ENTREGA EL ID DEL PRODUCTO Y REDIRIJE A EL CARRITO
+     */
     const request = parseRequestUrl();
     document.getElementById("add-button").addEventListener("click", () => {
       document.location.hash = `/cart/${request.id}`;
@@ -16,6 +25,11 @@ const ProductView = {
   render: async () => {
     const request = parseRequestUrl();
     showLoading();
+
+    /**
+     * OBTIENE EL PRODUCTO
+     * RECIBE EL ID PARA HACER LA PETICION AL BACKEND
+     */
     const product = await getProduct(request.id);
 
     noLoading();

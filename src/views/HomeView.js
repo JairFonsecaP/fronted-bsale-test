@@ -1,18 +1,11 @@
 import { apiUrl } from "../js/config.js";
-import {
-  noLoading,
-  parseRequestUrl,
-  showLoading,
-  toThousand,
-} from "../js/utils.js";
+import { noLoading, showLoading, toThousand } from "../js/utils.js";
 
 const url = apiUrl;
 showLoading();
 const HomeView = {
   after_render: () => {},
   render: async () => {
-    const request = parseRequestUrl();
-
     const productsApi = await fetch(url + "products/list", {
       "Content-Type": "application/json",
     });
@@ -30,7 +23,7 @@ const HomeView = {
     const products = await productsApi.json();
 
     const categories = await categoriesApi.json();
-
+    noLoading();
     return categories
       .map(
         (category) =>

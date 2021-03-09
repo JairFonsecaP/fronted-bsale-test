@@ -213,7 +213,8 @@ nav {
 .detail-information li {
   margin: 10px;
 }
-.detail-buy {
+.detail-buy,
+.pay-buy {
   margin: 20px;
   padding: 20px 0;
   width: 80%;
@@ -225,7 +226,8 @@ nav {
   transition-property: border text-decoration background-color;
   transition-duration: 300ms;
 }
-.detail-buy:hover {
+.detail-buy:hover,
+.pay-buy:hover {
   text-decoration-line: underline;
   background-color: #000;
 }

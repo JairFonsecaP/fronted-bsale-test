@@ -1,3 +1,6 @@
+/**
+ * IMPORTACIONES
+ */
 import { searchProducts } from "../js/api.js";
 import {
   noLoading,
@@ -9,15 +12,27 @@ import {
 const SearchView = {
   render: async () => {
     showLoading();
+    /**
+     * PARSEA LA URL PARA BUSCAR LA QUERY
+     */
     const request = parseRequestUrl();
     let find = request.search.split("+");
     find = find.reduce((a, c) => a + c + " ", "").slice(0, -1);
-
+    /**
+     * LLAMA A METODO QUE BUSCA LA CONSULTA
+     * Y DEVUELVE LOS PRODUCTOS ENCONTRADOS
+     */
     const products = await searchProducts(request.search);
     noLoading();
+    /**
+     * VALIDA QUE SEA UNA CONSULTA CON RESULTADOS
+     */
     if (products.length === 0) {
       return `<h2>Lo sentimos no se pudo encontrar "${find}"</h2>`;
     }
+    /**
+     * RENDERIZA LO ENCONTRADO
+     */
     return `
     <a href="/"><p class="back-to-home"><< Buscar más productos</p></a>
     <div class="section">      

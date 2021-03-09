@@ -7,6 +7,9 @@ import { noLoading, parseRequestUrl, showLoading } from "./js/utils.js";
 import Header from "./js/components/Header.js";
 import Footer from "./js/components/Footer.js";
 
+/**
+ * SISTEMA DE RUTEO
+ */
 const routes = {
   "/": HomeView,
   "/product/:id": ProductView,
@@ -18,7 +21,6 @@ const routes = {
 const router = async () => {
   showLoading();
   const request = parseRequestUrl();
-
   const parseUrl = request.search
     ? `/search/:id`
     : (request.resource ? `/${request.resource}` : "/") +

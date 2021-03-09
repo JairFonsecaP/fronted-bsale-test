@@ -1,3 +1,6 @@
+/**
+ * IMPORTACIONES
+ */
 import { getProduct } from "../js/api.js";
 import {
   getCartItems,
@@ -12,10 +15,14 @@ import {
   noLoading,
 } from "../js/utils.js";
 
+/**
+ * BUSCA SI EL PRODUCTO YA SE ENCUENTRA EN EL LOCALSTORAGE
+ * SI LO ENCUENTRA DEVUELVE EL MISMO ARRAY SI NO EXISTE
+ * DEVUELVE EL ARRAY YA EXISTENTE Y LE AGREGA EL NUEVO PRODUCTO
+ */
 const addToCart = (item, forceUpdate = false) => {
   let cartItems = getCartItems();
   const existItem = cartItems.find((x) => x.id === item.id);
-
   if (existItem) {
     if (forceUpdate) {
       cartItems = cartItems.map((x) => (x.id === existItem.id ? item : x));
@@ -28,6 +35,10 @@ const addToCart = (item, forceUpdate = false) => {
     rerender(CartView);
   }
 };
+/**
+ * LLAMA AL METODO DESDE LOCALSTORAGE.JS PARA ELIMINAR UN PRODUCTO DEL LOCAL STORAGE
+ * RECIBE EL ID DEL PRODUCTO
+ **/
 const removeToCart = (id) => {
   setCartItems(getCartItems().filter((x) => x.id !== parseInt(id)));
   if (id === parseRequestUrl().id) {
@@ -36,26 +47,37 @@ const removeToCart = (id) => {
     rerender(CartView);
   }
 };
+
 const CartView = {
   after_render: () => {
+    /**
+     * METODO QUE AGREGA VOLUMEN AL LOCALSTORAGE SEGUN LO QUE EL CLIENTE SELECCIONE EN LA VISTA
+     */
     const qtySelect = document.getElementsByClassName("cart-qty-select");
     Array.from(qtySelect).forEach((qty) => {
       qty.addEventListener("change", (e) => {
         const item = getCartItems().find((x) => x.id === parseInt(qty.id));
-
         addToCart({ ...item, quantity: Number(e.target.value) }, true);
       });
     });
 
-    const deleteButton = document.getElementsByClassName("cart-delete-button");
+    /**
+     * LLAMA AL METODO QUE ELIMINA UN ELEMENTO DEL LOCAL STORAGE
+     * ENVIA EL ID DEL PRODUCTO A ELIMINAR
+     */
 
+    const deleteButton = document.getElementsByClassName("cart-delete-button");
     Array.from(deleteButton).forEach((button) => {
       button.addEventListener("click", () => {
         removeToCart(button.id);
       });
     });
 
+    /**
+     * LLAMA METODO QUE ELIMITA TODOS LOS PRODUCTOS DE LOCALSTORAGE
+     */
     document.getElementById("pay-button").addEventListener("click", () => {
+      deleteCartItems();
       document.location.hash = "/";
     });
   },
@@ -63,10 +85,12 @@ const CartView = {
   render: async () => {
     showLoading();
     const request = parseRequestUrl();
-
+    /**
+     *TRAE EL PRODUCTO QUE SE ESTA AGREGANDO Y LLAMA AL METODO DE AGREGAR
+     LE ENTREGA UN OBJETO CON TODO LOS CAMPOS NECESARIOS PARA MOSTRAR EN LA VISTA CARRITO
+     */
     if (request.id) {
       const product = await getProduct(request.id);
-
       addToCart({
         id: product.id,
         name: product.name,
@@ -77,8 +101,15 @@ const CartView = {
         quantity: 1,
       });
     }
+    /**
+     * OBTIENE TODOS LOS PRODUCTOS DEL LOCAL STORAGE PARA
+     * MOSTRARLOS EN LA VISTA DEL CARRITO
+     */
     const cartItems = getCartItems();
     noLoading();
+    /**
+     * RENDERIZA EL HTML
+     */
     return `
     <a href="/"><p class="back-to-home"><< Buscar más productos</p></a>
     <div>
@@ -152,7 +183,7 @@ const CartView = {
             )
           )}
       </h2>
-      <button id="pay-button" class="detail-buy">
+      <button id="pay-button" class="pay-buy">
           Pagar
       </button>
     </div>`
